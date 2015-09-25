@@ -1,0 +1,24 @@
+{
+  "name": "train-examples",
+  "version": "1.0.0",
+  "description": "The train as an array example",
+  "main": "app.js",
+  "dependencies": {
+    "monument": "^2.0.0"
+  },
+  "devDependencies": {
+    "chai": "~3.2.0",
+    "gulp": "~3.9.0",
+    "gulp-mocha": "~2.1.3",
+    "gulp-sass": "^2.0.4"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "gulp test"
+  },
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": "^4.0.0"
+  }
+}
