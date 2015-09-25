@@ -1,4 +1,4 @@
-(function (win) {
+((win) => {
     'use strict';
 
     win.trains = [];
@@ -50,11 +50,11 @@
         'flat'
     ];
 
-    win.randomArrayElement = function (arrayIn) {
+    win.randomArrayElement = (arrayIn) => {
         return arrayIn[Math.floor(Math.random() * arrayIn.length)];
     };
 
-    win.createRandomCars = function (count) {
+    win.createRandomCars = (count) => {
         var rtn = [];
 
         rtn.push({
@@ -81,18 +81,18 @@
         });
     }
 
-    win.locationMatches = function (city, start) {
-        return function (item) {
+    win.locationMatches = (city, start) => {
+        return (item) => {
             var compare = (start) ? item.startLocation : item.destination;
             return city === compare;
         };
     };
 
-    win.headedTo = function (city) {
+    win.headedTo = (city) => {
         return win.locationMatches(city, false);
     };
 
-    win.leavingFrom = function (city) {
+    win.leavingFrom = (city) => {
         return win.locationMatches(city, true);
     };
 
@@ -102,11 +102,11 @@
         };
     };
 
-    win.shortTrip = function (item) {
+    win.shortTrip = (item) => {
         return item.startLocation === item.destination;
     };
 
-    win.shortTripReduce = function (accumulator, item) {
+    win.shortTripReduce = (accumulator, item) => {
         if (win.shortTrip(item)) {
             if (!Array.isArray(accumulator[item.destination])) {
                 accumulator[item.destination] = [];
@@ -118,8 +118,8 @@
         return accumulator;
     };
 
-    win.carrying = function (cargo) {
-        return function (item) {
+    win.carrying = (cargo) => {
+        return (item) => {
             if (Array.isArray(item.cars)) {
                 return item.cars.filter(function (car) {
                     return car.contents === cargo;
@@ -130,19 +130,19 @@
         };
     };
 
-    win.not = function (func) {
-        return function () {
+    win.not = (func) => {
+        return () => {
             return !func.apply({}, arguments);
         };
     };
 
-    win.toID = function (prev, train) {
+    win.toID = (prev, train) => {
         prev.push(train.trainID);
 
         return prev;
     };
 
-    win.destinations = function (prev, train) {
+    win.destinations = (prev, train) => {
         if(prev.indexOf(train.destination) === -1){
             prev.push(train.destination);
         }
@@ -150,7 +150,7 @@
         return prev;
     };
 
-    win.longest = function (prev, item) {
+    win.longest = (prev, item) => {
         if(typeof prev[0] === 'undefined' || prev[0].cars.length < item.cars.length) {
             return [item];
         } else if (prev[0].cars.length === item.cars.length) {
@@ -160,7 +160,7 @@
         return prev;
     };
 
-    win.shortest = function (prev, item) {
+    win.shortest = (prev, item) => {
         if(typeof prev[0] === 'undefined' || prev[0].cars.length > item.cars.length) {
             return [item];
         } else if (prev[0].cars.length === item.cars.length) {
